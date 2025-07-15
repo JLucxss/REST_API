@@ -9,7 +9,7 @@ import { UserIdCheckMiddleware } from "src/middlewares/userId-check.middleware";
     imports: [PrimasModule],
     controllers: [UserController],
     providers: [PrismaService, UserService],
-    exports: []
+    exports: [UserService]
 })
 export class UserModule implements NestModule {
 
