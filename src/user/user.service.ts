@@ -12,44 +12,44 @@ export class UserService{
 
     async create(data: CreateUserDTO){
          
-        return await this.prisma.users.create({
+        return await this.prisma.user.create({
             data,
         })
     }
 
     async list() {
-        return this.prisma.users.findMany()
+        return this.prisma.user.findMany()
     }
 
     async readOne(id: number) {
         await this.exists(id)
 
-        return this.prisma.users.findUnique({ where: {id} })
+        return this.prisma.user.findUnique({ where: {id} })
     }
 
     async update(data: UpdatePutUserDTO, id: number){
         
         await this.exists(id)
 
-        return this.prisma.users.update({ data, where: { id } })
+        return this.prisma.user.update({ data, where: { id } })
     }
 
     async partialUpdate(data: UpdatePatchUserDTO, id: number){
         
         await this.exists(id)
 
-        return this.prisma.users.update({ data, where: { id } })
+        return this.prisma.user.update({ data, where: { id } })
     }
 
     async delete(id: number) {
 
         await this.exists(id)
 
-        return this.prisma.users.delete({ where: { id } })
+        return this.prisma.user.delete({ where: { id } })
     }
 
     async exists(id: number) {
-        if(!await this.prisma.users.count({where: {id} })){
+        if(!await this.prisma.user.count({where: {id} })){
             throw new NotFoundException(`O usuário ${id} não existe`)
         }
     }
