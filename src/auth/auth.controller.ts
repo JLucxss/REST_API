@@ -6,6 +6,7 @@ import { AuthResetPassDto } from "./dto/auth-resetPass.dto";
 import { UserService } from "src/user/user.service";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "src/guards/auth.guard";
+import { User } from "./decorators/user.decorator";
 
 @Controller('auth')
 export class AuthController {
@@ -37,8 +38,8 @@ export class AuthController {
 
     @UseGuards(AuthGuard)
     @Post('me')
-    async me (@Req() req) {
+    async me (@User() user) {
         
-        return {me: 'ok', data: req.tokenPayload}
+        return { user }
     }
 }
