@@ -875,10 +875,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
+    role: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
+    role: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -886,6 +888,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    role: number | null
     createdAt: Date | null
     updatedAtl: Date | null
   }
@@ -895,6 +898,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    role: number | null
     createdAt: Date | null
     updatedAtl: Date | null
   }
@@ -904,6 +908,7 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    role: number
     createdAt: number
     updatedAtl: number
     _all: number
@@ -912,10 +917,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
+    role?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
+    role?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -923,6 +930,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    role?: true
     createdAt?: true
     updatedAtl?: true
   }
@@ -932,6 +940,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    role?: true
     createdAt?: true
     updatedAtl?: true
   }
@@ -941,6 +950,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    role?: true
     createdAt?: true
     updatedAtl?: true
     _all?: true
@@ -1037,6 +1047,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    role: number
     createdAt: Date
     updatedAtl: Date
     _count: UserCountAggregateOutputType | null
@@ -1065,6 +1076,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAtl?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1076,11 +1088,12 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAtl?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "createdAt" | "updatedAtl", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "createdAt" | "updatedAtl", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1090,6 +1103,7 @@ export namespace Prisma {
       name: string
       email: string
       password: string
+      role: number
       createdAt: Date
       updatedAtl: Date
     }, ExtArgs["result"]["user"]>
@@ -1465,6 +1479,7 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAtl: FieldRef<"User", 'DateTime'>
   }
@@ -1807,6 +1822,7 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     password: 'password',
+    role: 'role',
     createdAt: 'createdAt',
     updatedAtl: 'updatedAtl'
   };
@@ -1875,6 +1891,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    role?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAtl?: DateTimeFilter<"User"> | Date | string
   }
@@ -1884,6 +1901,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAtl?: SortOrder
     _relevance?: UserOrderByRelevanceInput
@@ -1897,6 +1915,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    role?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAtl?: DateTimeFilter<"User"> | Date | string
   }, "id">
@@ -1906,6 +1925,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAtl?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -1923,6 +1943,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    role?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAtl?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -1931,6 +1952,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    role?: number
     createdAt?: Date | string
     updatedAtl?: Date | string
   }
@@ -1940,6 +1962,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    role?: number
     createdAt?: Date | string
     updatedAtl?: Date | string
   }
@@ -1948,6 +1971,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAtl?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1957,6 +1981,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAtl?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1966,6 +1991,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    role?: number
     createdAt?: Date | string
     updatedAtl?: Date | string
   }
@@ -1974,6 +2000,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAtl?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1983,6 +2010,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    role?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAtl?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2035,12 +2063,14 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAtl?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -2048,6 +2078,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAtl?: SortOrder
   }
@@ -2057,12 +2088,14 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAtl?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
+    role?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2117,16 +2150,16 @@ export namespace Prisma {
     set?: string
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {

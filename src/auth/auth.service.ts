@@ -9,8 +9,8 @@ import { access } from "fs";
 @Injectable()
 export class AuthService {
 
-    private issuer: 'login'
-    private audience: 'users'
+    private issuer: string = 'login'
+    private audience: string = 'users'
     
     constructor(
         private readonly jwtservice: JwtService, 
