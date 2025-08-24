@@ -4,7 +4,7 @@ import { User } from "generated/prisma";
 import { PrismaService } from "src/prisma/prisma.service";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { UserService } from "src/user/user.service";
-import { access } from "fs";
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -58,9 +58,13 @@ export class AuthService {
     }
 
     async login(email: string, password: string) {
-        const user = await this.prisma.user.findFirst({ where: {email, password} })
+        const user = await this.prisma.user.findFirst({ where: { email } })
     
         if(!user) {
+            throw new UnauthorizedException(`Credenciais inválidas`)
+        }
+
+        if(!await bcrypt.compare(password, user.password)) {
             throw new UnauthorizedException(`Credenciais inválidas`)
         }
 
