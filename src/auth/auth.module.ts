@@ -7,7 +7,7 @@ import { AuthService } from "./auth.service";
 
 @Module({
     imports: [JwtModule.register({
-        secret: "JL085COM32CARACTERES!PQTEMQTER32"
+        secret: process.env.JWTSECRET,
     }), 
     forwardRef(() => UserModule),
     PrimasModule],
