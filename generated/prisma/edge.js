@@ -128,7 +128,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Lucas\\Desktop\\codes\\nestJS\\api\\generated\\prisma",
+      "value": "C:\\Users\\Lukas\\Desktop\\REST_API\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -142,7 +142,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Lucas\\Desktop\\codes\\nestJS\\api\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Lukas\\Desktop\\REST_API\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -156,12 +156,11 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "mysql://root:root@localhost:3306/api"
       }
     }
   },

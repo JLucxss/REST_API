@@ -1,4 +1,4 @@
-import { Body, Controller, Headers, Post, Req, UseGuards } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Headers, Post, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { AuthLoginDto } from "./dto/auth-login.dto";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { AuthForgetPassDto } from "./dto/auth-forgetPass.dto";
@@ -7,6 +7,11 @@ import { UserService } from "src/user/user.service";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "src/guards/auth.guard";
 import { User } from "../decorators/user.decorator";
+import { FileInterceptor } from "@nestjs/platform-express";
+
+// For file handling
+import { writeFile } from 'fs/promises';
+import { join } from "path";
 
 @Controller('auth')
 export class AuthController {
@@ -39,7 +44,24 @@ export class AuthController {
     @UseGuards(AuthGuard)
     @Post('me')
     async me (@User() user) {
-        
         return { user }
     }
+
+    @UseInterceptors(FileInterceptor('file'))
+    @UseGuards(AuthGuard)
+    @Post('photo')
+    async uploadPhoto(@User() user, @UploadedFile('file') photo: Express.Multer.File) {
+
+        try{
+            // Ensure the storage/photos directory exists before writing files in a real application
+            const result = await writeFile(join(__dirname, '..', '..', 'storage', 'photos', `photo-${user.id}.png`), photo.buffer)
+
+            return { result, message: 'Photo uploaded successfully' }
+        }catch(e){
+            throw new BadRequestException('File upload failed')
+        }
+
+    }
+
+    
 }
