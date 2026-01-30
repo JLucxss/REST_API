@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Headers, Post, Req, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Controller, FileTypeValidator, Headers, ParseFilePipe, Post, Req, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
 import { AuthLoginDto } from "./dto/auth-login.dto";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { AuthForgetPassDto } from "./dto/auth-forgetPass.dto";
@@ -50,7 +50,13 @@ export class AuthController {
     @UseInterceptors(FileInterceptor('file'))
     @UseGuards(AuthGuard)
     @Post('photo')
-    async uploadPhoto(@User() user, @UploadedFile('file') photo: Express.Multer.File) {
+    async uploadPhoto(
+        @User() user, 
+        @UploadedFile(new ParseFilePipe({ 
+            validators: [
+                new FileTypeValidator({ fileType: 'image/png'})
+            ]
+        })) photo: Express.Multer.File) {
 
         try{
             // Ensure the storage/photos directory exists before writing files in a real application
