@@ -1,7 +1,5 @@
 import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "generated/prisma";
-import { PrismaService } from "src/prisma/prisma.service";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { UserService } from "src/user/user.service";
 import * as bcrypt from 'bcrypt'
@@ -15,7 +13,6 @@ export class AuthService {
     
     constructor(
         private readonly jwtservice: JwtService, 
-        private readonly prisma: PrismaService,
         private readonly userService: UserService,
         private readonly mailer: MailerService
     ){}
