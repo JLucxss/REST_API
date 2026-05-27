@@ -9,7 +9,7 @@ import { User } from "src/user/entity/user.entity";
 @Module({
     imports: [
         JwtModule.register({
-            secret: process.env.JWTSECRET,
+            secret: String(process.env.JWTSECRET),
         }), 
         forwardRef(() => UserModule),
         TypeOrmModule.forFeature([User])

@@ -1,32 +1,37 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity({name: 'users'})
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn({
+        unsigned: true
+    })
+    id!: number
 
     @Column({
         length: 63
     })
-    name: string
+    name!: string
 
     @Column({
+        length: 127,
         unique: true
     })
-    email: string 
-
-    @Column()
-    password: string
-
-    @CreateDateColumn()
-    createdAt: string
-
-    @UpdateDateColumn()
-    updatedAt: string
+    email!: string 
 
     @Column({
-        enum: [1, 2]
+        length: 127
     })
-    role: number
+    password!: string
+
+    @CreateDateColumn()
+    createdAt!: string
+
+    @UpdateDateColumn()
+    updatedAt!: string
+
+    @Column({
+        default: 1
+    })
+    role!: number
     
 }

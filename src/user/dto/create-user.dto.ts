@@ -4,10 +4,10 @@ import { Role } from "src/enums/roles.enum";
 export class CreateUserDTO {
 
     @IsString()
-    name: string;
+    name!: string;
 
     @IsEmail()
-    email: string;
+    email!: string;
 
     @IsNotEmpty()
     @IsStrongPassword({
@@ -18,9 +18,9 @@ export class CreateUserDTO {
         minUppercase: 0,
 
     })
-    password: string;
+    password!: string;
 
     @IsOptional()
     @IsEnum(Role)
-    role: number
+    role!: number
 }

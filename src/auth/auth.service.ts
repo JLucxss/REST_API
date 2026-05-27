@@ -4,6 +4,9 @@ import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { UserService } from "src/user/user.service";
 import * as bcrypt from 'bcrypt'
 import { MailerService } from "@nestjs-modules/mailer";
+import { User } from "src/user/entity/user.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +17,9 @@ export class AuthService {
     constructor(
         private readonly jwtservice: JwtService, 
         private readonly userService: UserService,
-        private readonly mailer: MailerService
+        private readonly mailer: MailerService,
+        @InjectRepository(User)
+        private readonly usersRepository: Repository<User>
     ){}
 
     createToken (user: User) {
@@ -57,7 +62,8 @@ export class AuthService {
     }
 
     async login(email: string, password: string) {
-        const user = await this.prisma.user.findFirst({ where: { email } })
+
+        const user = await this.usersRepository.findOne({ where: { email } })
     
         if(!user) {
             throw new UnauthorizedException(`Credenciais inválidas`)
@@ -71,7 +77,8 @@ export class AuthService {
     }
 
     async forgetPass(email: string) {
-        const user = await this.prisma.user.findFirst({ where: {email} })
+
+        const user = await this.usersRepository.findOneBy({ email })
     
         if (!user) {
             throw new UnauthorizedException('E-mail está incorreto')
@@ -115,12 +122,18 @@ export class AuthService {
             const salt = await bcrypt.genSalt();
             newPassword = await bcrypt.hash(newPassword, salt);
 
-        const user = await this.prisma.user.update({ 
-            where: { id: data.id },
-            data: { password: newPassword }
-         })
+        
+            await this.usersRepository.update(Number(data.id), {
+                password: newPassword
+            })
 
-         return this.createToken(user)
+            const user = await this.userService.readOne(Number(data.id))
+
+            if (!user) {
+                throw new BadRequestException('Usuário não encontrado')
+            }
+
+            return this.createToken(user)
 
         } catch(e) {
             throw new BadRequestException(e)
