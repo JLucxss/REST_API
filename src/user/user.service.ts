@@ -19,7 +19,7 @@ export class UserService{
 
         if(
             await this.usersRepository.exists({
-            where: { email: data.email}
+            where: { email: data.email} 
         })
         ) {
             throw new BadRequestException('Este email já está sendo usado!') 
