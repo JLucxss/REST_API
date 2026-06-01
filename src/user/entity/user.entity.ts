@@ -5,7 +5,7 @@ export class User {
     @PrimaryGeneratedColumn({
         unsigned: true
     })
-    id!: number
+    id?: number
 
     @Column({
         length: 63
@@ -24,10 +24,10 @@ export class User {
     password!: string
 
     @CreateDateColumn()
-    createdAt!: string
+    createdAt?: Date
 
     @UpdateDateColumn()
-    updatedAt!: string
+    updatedAt?: Date
 
     @Column({
         default: 1
